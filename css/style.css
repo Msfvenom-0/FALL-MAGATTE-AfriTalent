@@ -103,7 +103,7 @@ p {
   font-weight: 800;
   color: var(--couleur-texte) !important;
 }
-
+ 
 .navbar-brand i, .bi-gem {
   color: var(--couleur-accent) !important;
 }
