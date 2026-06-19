@@ -96,3 +96,101 @@ const observateurFade = new IntersectionObserver((entrees) => {
 }, { threshold: 0.15 });
 
 elementsFadeIn.forEach(el => observateurFade.observe(el));
+// -- filtrage dynamique des freelances --
+const boutonsFiltre = document.querySelectorAll('.btn-filtre');
+const cartesFreelance = document.querySelectorAll('.carte-freelance-col');
+
+boutonsFiltre.forEach(bouton => {
+  bouton.addEventListener('click', () => {
+    boutonsFiltre.forEach(b => b.classList.remove('actif'));
+    bouton.classList.add('actif');
+
+    const categorie = bouton.getAttribute('data-categorie');
+
+    cartesFreelance.forEach(carte => {
+      if (categorie === 'tous' || carte.getAttribute('data-categorie') === categorie) {
+        carte.style.display = 'block';
+      } else {
+        carte.style.display = 'none';
+      }
+    });
+  });
+});
+
+// -- validation formulaire de contact --
+const boutonEnvoyer = document.getElementById('bouton-envoyer');
+
+boutonEnvoyer?.addEventListener('click', () => {
+  let valide = true;
+
+  // nom
+  const nom = document.getElementById('champ-nom');
+  const erreurNom = document.getElementById('erreur-nom');
+  if (!nom.value.trim() || nom.value.trim().length < 2) {
+    erreurNom.textContent = 'Le nom doit contenir au moins 2 caractères.';
+    nom.classList.add('invalide');
+    valide = false;
+  } else {
+    erreurNom.textContent = '';
+    nom.classList.remove('invalide');
+  }
+
+  // prénom
+  const prenom = document.getElementById('champ-prenom');
+  const erreurPrenom = document.getElementById('erreur-prenom');
+  if (!prenom.value.trim() || prenom.value.trim().length < 2) {
+    erreurPrenom.textContent = 'Le prénom doit contenir au moins 2 caractères.';
+    prenom.classList.add('invalide');
+    valide = false;
+  } else {
+    erreurPrenom.textContent = '';
+    prenom.classList.remove('invalide');
+  }
+
+  // email
+  const email = document.getElementById('champ-email');
+  const erreurEmail = document.getElementById('erreur-email');
+  const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!regexEmail.test(email.value.trim())) {
+    erreurEmail.textContent = 'Veuillez entrer un email valide.';
+    email.classList.add('invalide');
+    valide = false;
+  } else {
+    erreurEmail.textContent = '';
+    email.classList.remove('invalide');
+  }
+
+  // sujet
+  const sujet = document.getElementById('champ-sujet');
+  const erreurSujet = document.getElementById('erreur-sujet');
+  if (!sujet.value) {
+    erreurSujet.textContent = 'Veuillez choisir un sujet.';
+    sujet.classList.add('invalide');
+    valide = false;
+  } else {
+    erreurSujet.textContent = '';
+    sujet.classList.remove('invalide');
+  }
+
+  // message 20 caractères minimum
+  const message = document.getElementById('champ-message');
+  const erreurMessage = document.getElementById('erreur-message');
+  if (!message.value.trim() || message.value.trim().length < 20) {
+    erreurMessage.textContent = 'Le message doit contenir au moins 20 caractères.';
+    message.classList.add('invalide');
+    valide = false;
+  } else {
+    erreurMessage.textContent = '';
+    message.classList.remove('invalide');
+  }
+
+  // si tout est bon
+  if (valide) {
+    document.getElementById('message-succes').style.display = 'flex';
+    nom.value = '';
+    prenom.value = '';
+    email.value = '';
+    sujet.value = '';
+    message.value = '';
+  }
+});
