@@ -669,3 +669,21 @@ p {
     font-size: 2.8rem;
   }
 }
+
+/* -- light mode -- */
+body.mode-clair {
+  --couleur-fond: #f5f0ff;
+  --couleur-texte: #1A1A2E;
+  --couleur-texte-doux: #5a4a7a;
+  --couleur-carte: #ffffff;
+  --couleur-bordure: #ddd0f0;
+  --ombre-carte: 0 4px 24px rgba(123, 47, 190, 0.1);
+}
+
+body.mode-clair #barre-nav {
+  background-color: rgba(245, 240, 255, 0.92) !important;
+}
+
+body.mode-clair #pied-de-page {
+  background-color: #1A1A2E;
+}
