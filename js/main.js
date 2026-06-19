@@ -49,3 +49,50 @@ window.addEventListener('scroll', () => {
 boutonHaut?.addEventListener('click', () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
+// -- compteurs animés au scroll --
+const compteurs = document.querySelectorAll('.chiffre-anime');
+
+function animerCompteur(el) {
+  const cible = parseInt(el.getAttribute('data-cible'));
+  const duree = 2000;
+  const pas = Math.ceil(cible / (duree / 16));
+  let valeur = 0;
+
+  const intervalle = setInterval(() => {
+    valeur += pas;
+    if (valeur >= cible) {
+      valeur = cible;
+      clearInterval(intervalle);
+    }
+    el.textContent = valeur.toLocaleString('fr-FR');
+  }, 16);
+}
+
+const observateurCompteurs = new IntersectionObserver((entrees) => {
+  entrees.forEach(entree => {
+    if (entree.isIntersecting) {
+      animerCompteur(entree.target);
+      observateurCompteurs.unobserve(entree.target);
+    }
+  });
+}, { threshold: 0.5 });
+
+compteurs.forEach(c => observateurCompteurs.observe(c));
+
+// -- animations fade-in au scroll --
+const elementsFadeIn = document.querySelectorAll(
+  '.carte-bento, .carte-categorie, .carte-freelance, .carte-membre, .carte-plan, .carte-valeur'
+);
+
+elementsFadeIn.forEach(el => el.classList.add('fade-in'));
+
+const observateurFade = new IntersectionObserver((entrees) => {
+  entrees.forEach(entree => {
+    if (entree.isIntersecting) {
+      entree.target.classList.add('visible');
+      observateurFade.unobserve(entree.target);
+    }
+  });
+}, { threshold: 0.15 });
+
+elementsFadeIn.forEach(el => observateurFade.observe(el));
