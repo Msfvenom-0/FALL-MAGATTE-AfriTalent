@@ -194,3 +194,45 @@ boutonEnvoyer?.addEventListener('click', () => {
     message.value = '';
   }
 }); 
+const titreHero = document.getElementById('titre-hero');
+
+function animeScramble(element, vitesse = 10) {
+  const texteFinal = element.textContent;
+  const caracteres = '!<>-_\\/[]{}—=+*^?#@%&';
+  const longueur = texteFinal.length;
+  let frame = 0;
+  const totalFrames = longueur * 4;
+
+  const interval = setInterval(() => {
+    let rendu = '';
+
+    for (let i = 0; i < longueur; i++) {
+      const char = texteFinal[i];
+
+      if (char === ' ') {
+        rendu += ' ';
+        continue;
+      }
+
+      if (i < frame / 4) {
+        rendu += char;
+      } else if (Math.random() > 0.45) {
+        rendu += caracteres[Math.floor(Math.random() * caracteres.length)];
+      } else {
+        rendu += char;
+      }
+    }
+
+    element.textContent = rendu;
+    frame++;
+
+    if (frame > totalFrames) {
+      clearInterval(interval);
+      element.textContent = texteFinal;
+    }
+  }, vitesse);
+}
+
+if (titreHero) {
+  animeScramble(titreHero);
+}

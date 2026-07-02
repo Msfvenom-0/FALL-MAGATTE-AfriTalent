@@ -698,3 +698,29 @@ body.mode-clair #pied-de-page {
   opacity: 1;
   transform: translateY(0);
 }
+/* -- page blog -- */
+#liste-articles {
+  padding: var(--espacement-section) 0;
+}
+
+#liste-articles .carte-bento {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  height: 100%;
+}
+
+#liste-articles .carte-bento h3 {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+#liste-articles .carte-bento small {
+  color: var(--couleur-texte-doux);
+  font-size: 0.82rem;
+  margin-top: auto;
+}
+/* -- animation lettres hero -- */
+#titre-hero .lettre {
+  display: inline-block;
+}
