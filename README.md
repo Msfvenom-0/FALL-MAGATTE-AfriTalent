@@ -41,4 +41,4 @@ Fonctionnalités JavaScript
 
 Lien GitHub Pages
 
-https://msfvenom-0.github.io/FALL-Magatte-AfriTalent/
+https://msfvenom-0.github.io/FALL-MAGATTE-AfriTalent/
